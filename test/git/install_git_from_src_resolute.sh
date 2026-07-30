@@ -1,1 +1,0 @@
-install_git_from_src_noble.sh

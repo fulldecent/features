@@ -1,1 +1,0 @@
-docker_with_default_iptables.sh

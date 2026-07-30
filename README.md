@@ -22,7 +22,7 @@ You may learn about Features at [containers.dev](https://containers.dev/implemen
 
 To reference a Feature from this repository, add the desired Features to a `devcontainer.json`. Each Feature has a `README.md` that shows how to reference the Feature and which options are available for that Feature.
 
-The example below installs the `go` and `docker-in-docker` declared in the [`./src`](./src) directory of this
+The example below installs the `ruby` Feature declared in the [`./src`](./src) directory of this
 repository.
 
 See the relevant Feature's README for supported options.
@@ -31,24 +31,21 @@ See the relevant Feature's README for supported options.
 "name": "my-project-devcontainer",
 "image": "mcr.microsoft.com/devcontainers/base:ubuntu",  // Any generic, debian-based image.
 "features": {
-    "ghcr.io/devcontainers/features/go:1": {
-        "version": "1.18"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:1": {
+    "ghcr.io/devcontainers/features/ruby:1": {
         "version": "latest",
-        "moby": true
+        "versionManager": "none"
     }
 }
 ```
 
 The `:latest` version annotation is added implicitly if omitted. To pin to a specific package version
-([example](https://github.com/devcontainers/features/pkgs/container/features/go/versions)), append it to the end of the
+([example](https://github.com/devcontainers/features/pkgs/container/features/ruby/versions)), append it to the end of the
 Feature. Features follow semantic versioning conventions, so you can pin to a major version `:1`, minor version `:1.0`, or patch version `:1.0.0` by specifying the appropriate label.
 
 ```jsonc
 "features": {
-    "ghcr.io/devcontainers/features/go:1.0.0": {
-        "version": "1.18"
+    "ghcr.io/devcontainers/features/ruby:1.0.0": {
+        "version": "3.4"
     }
 }
 ```
@@ -68,23 +65,11 @@ devcontainer build --workspace-folder <path-to-my-project-with-devcontainer>
 .
 ├── README.md
 ├── src
-│   ├── dotnet
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-│   ├── go
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-|   ├── ...
+│   ├── ruby
 │   │   ├── devcontainer-feature.json
 │   │   └── install.sh
 ├── test
-│   ├── dotnet
-│   │   └── test.sh
-│   ├── go
-|   |   ├── scenarios.json
-|   |   ├── test_scenario_1.json
-│   |   └── test.sh
-|   ├── ...
+│   ├── ruby
 │   │   └── test.sh
 ...
 ```
