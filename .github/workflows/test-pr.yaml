@@ -3,24 +3,12 @@ on:
   pull_request:
 
 jobs:
-  detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      features: ${{ steps.filter.outputs.changes }}
-    steps:
-      - uses: dorny/paths-filter@v4
-        id: filter
-        with:
-          filters: |
-            ruby: ./**/ruby/**
-
   test:
-    needs: [detect-changes]
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
       matrix:
-        features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
+        features: ["ruby"]
         baseImage:
           [
             "ubuntu:jammy",
@@ -38,14 +26,12 @@ jobs:
 
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
         run: devcontainer features test  --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
-
   test-scenarios:
-    needs: [detect-changes]
     runs-on: devcontainer-image-builder-ubuntu
     continue-on-error: true
     strategy:
       matrix:
-        features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
+        features: ["ruby"]
     steps:
       - uses: actions/checkout@v7
 
