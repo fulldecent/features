@@ -1,1 +1,0 @@
-docker_with_legacy_iptables.sh
